@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#b91c1c">
+<title>Nihongo Santai Travel</title>
+<style>
+:root{--red:#b91c1c;--red2:#dc2626;--redsoft:#fef2f2;--bg:#faf7f2;--card:#fff;--ink:#1f2937;--muted:#6b7280;--green:#16a34a;--amber:#d97706;--line:#e5e7eb;--radius:16px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans",Arial,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding-bottom:96px}
+header{background:linear-gradient(135deg,#7f1d1d,#b91c1c);color:#fff;padding:16px 16px 12px;position:sticky;top:0;z-index:20}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:44px;height:44px;border-radius:50%;background:#fff;padding:2px;object-fit:cover}
+.brand h1{font-size:19px;line-height:1.2}
+.brand p{font-size:12px;opacity:.85;margin-top:2px}
+.offchip{margin-left:auto;flex:0 0 auto;background:rgba(255,255,255,.2);border-radius:999px;padding:6px 10px;font-size:11px;font-weight:700}
+main{max-width:720px;margin:0 auto;padding:14px 14px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:14px;margin-bottom:12px;box-shadow:0 1px 3px rgba(0,0,0,.05)}
+h2{font-size:18px;margin-bottom:4px}
+.sub{font-size:13px;color:var(--muted);line-height:1.5;margin-bottom:10px}
+label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
+select,input[type=text],input[type=number],textarea{width:100%;border:1.5px solid var(--line);border-radius:12px;padding:12px;font-size:16px;background:#fff;color:var(--ink);font-family:inherit}
+textarea{min-height:70px;resize:vertical}
+button{font-family:inherit;cursor:pointer}
+.btn{border:none;border-radius:12px;padding:13px 16px;font-size:16px;font-weight:700}
+.btn-primary{background:var(--red);color:#fff;width:100%}
+.btn-primary:active{background:#991b1b}
+.btn-ghost{background:var(--redsoft);color:var(--red);border:1px solid #fecaca}
+.btn-small{padding:9px 12px;font-size:14px}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.note{font-size:12.5px;color:var(--muted);line-height:1.5}
+.note b{color:var(--ink)}
+.cat{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--red2);margin:16px 0 8px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.mini{border:1px solid var(--line);background:#fff;border-radius:999px;padding:7px 12px;font-size:13px}
+.mini.on{background:var(--red);color:#fff;border-color:var(--red)}
+.item{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:8px;background:#fff;cursor:pointer}
+.item .ja{font-size:22px;font-weight:700}
+.item .rm{font-size:13px;color:var(--muted)}
+.item .tr{font-size:15px;margin-top:4px}
+.item .tag{display:inline-block;font-size:11px;font-weight:700;color:var(--red);background:var(--redsoft);border-radius:999px;padding:2px 8px;margin-top:6px}
+.check{display:flex;gap:10px;align-items:flex-start}
+.check input{width:22px;height:22px;margin-top:2px;flex:0 0 auto;accent-color:var(--red)}
+.check .ja{font-size:19px;font-weight:700}
+.check .rm{font-size:12px;color:var(--muted)}
+.check.done .ja,.check.done .rm{text-decoration:line-through;opacity:.55}
+.prog{height:10px;background:#fee2e2;border-radius:999px;overflow:hidden;margin:8px 0}
+.prog i{display:block;height:100%;background:var(--red);border-radius:999px}
+.badge{display:inline-block;background:#fef3c7;color:#92400e;border-radius:999px;padding:4px 10px;font-size:12px;font-weight:700;margin-top:6px}
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:30;background:#fff;border-top:1px solid var(--line);display:flex}
+.tabs button{flex:1;border:none;background:#fff;padding:10px 2px 12px;font-size:11px;color:var(--muted)}
+.tabs button b{display:block;font-size:20px}
+.tabs button.on{color:var(--red);font-weight:700}
+section{display:none}
+section.on{display:block}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:50;display:none;align-items:center;justify-content:center;padding:20px}
+.modal.on{display:flex}
+.modal .box{background:#fff;border-radius:20px;padding:28px 20px;width:100%;max-width:420px;text-align:center}
+.modal .box .big{font-size:40px;font-weight:700;line-height:1.3;white-space:pre-line}
+.modal .box .rm{font-size:16px;color:var(--muted);margin-top:8px}
+.modal .box .tr{font-size:19px;margin-top:10px;font-weight:700}
+.modal .box .hint{font-size:12px;color:var(--muted);margin-top:14px}
+.modal .box .btn{margin-top:18px}
+.qopt{display:block;width:100%;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;padding:13px 14px;font-size:16px;margin-bottom:8px}
+.qopt.ok{background:#dcfce7;border-color:var(--green)}
+.qopt.bad{background:#fee2e2;border-color:var(--red)}
+.qopt:disabled{opacity:1}
+.score{font-size:44px;font-weight:800;color:var(--red);text-align:center}
+.row{display:flex;gap:8px;align-items:center}
+.row>*{flex:1}
+.sum{font-size:14px;line-height:1.7}
+.sum b{color:var(--red)}
+.del{border:none;background:none;color:var(--red);font-size:16px;padding:4px 8px}
+#splash{position:fixed;inset:0;background:linear-gradient(135deg,#7f1d1d,#b91c1c);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;color:#fff;transition:opacity .5s}
+#splash img{width:96px;height:96px;border-radius:50%;background:#fff;padding:4px;object-fit:cover;animation:pop 1.2s ease}
+#splash h1{margin-top:14px;font-size:22px}
+#splash p{font-size:13px;opacity:.85;margin-top:4px}
+@keyframes pop{0%{transform:scale(.7);opacity:0}60%{transform:scale(1.05)}100%{transform:scale(1);opacity:1}}
+#splash.hide{opacity:0;pointer-events:none}
+</style>
+</head>
+<body>
+<div id="splash"><img src="data:image/jpeg;base64,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" alt="Nihongo Santai"><h1>⛩️ Nihongo Santai Travel</h1><p>Panduan travel Jepang • Offline • N5</p></div>
+<header>
+  <div class="brand">
+    <img src="data:image/jpeg;base64,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" alt="Nihongo Santai">
+    <div><h1>Nihongo Santai Travel</h1><p>Teman perjalananmu di Jepang — frasa, konbini, menu, kuis &amp; trip</p></div>
+    <span class="offchip">📵 OFFLINE</span>
+  </div>
+</header>
+<main>
+<!-- ============ FRASA ============ -->
+<section id="sec-frasa" class="on">
+  <div class="card">
+    <h2>🗣️ Kartu Frasa</h2>
+    <p class="sub">Ketuk frasa untuk menampilkan kartu besar — tunjukkan ke staf toko, restoran, atau orang di jalan.</p>
+    <input type="text" id="frasaSearch" placeholder="Cari: toilet, terima kasih, harga…" oninput="renderFrasa()">
+    <div class="chips" id="frasaCats"></div>
+    <div id="frasaList"></div>
+  </div>
+</section>
+<!-- ============ KONBINI ============ -->
+<section id="sec-konbini">
+  <div class="card">
+    <h2>🍙 Checklist Konbini</h2>
+    <p class="sub">Tandai makanan &amp; barang yang sudah kamu coba di konbini Jepang. Tersimpan di HP.</p>
+    <div class="row"><div><b id="konbiniCount">0 / 0</b> <span class="note">dicoba</span></div><div style="text-align:right"><span class="badge" id="konbiniBadge">🏅 Mulai petualanganmu!</span></div></div>
+    <div class="prog"><i id="konbiniBar" style="width:0%"></i></div>
+    <div class="chips" id="konbiniCats"></div>
+    <div id="konbiniList"></div>
+    <button class="btn btn-ghost btn-small" onclick="resetKonbini()">Reset checklist</button>
+  </div>
+</section>
+<!-- ============ MENU ============ -->
+<section id="sec-menu">
+  <div class="card">
+    <h2>🍜 Menu Decoder</h2>
+    <p class="sub">Cari kata di menu Jepang dan lihat artinya. Cocok buat yang tidak bisa baca kanji.</p>
+    <input type="text" id="menuSearch" placeholder="Cari: ramen, sushi, すし…" oninput="renderMenu()">
+    <div class="chips" id="menuCats"></div>
+    <div id="menuList"></div>
+  </div>
+  <div class="card">
+    <h2>⚠️ Kartu Alergi &amp; Diet</h2>
+    <p class="sub">Pilih alergi atau dietmu, lalu tampilkan kartu Jepangnya ke staf restoran.</p>
+    <div id="alergiList"></div>
+    <label style="margin-top:10px">Diet</label>
+    <select id="dietSel">
+      <option value="">— Tidak ada —</option>
+      <option value="veg">ベジタリアンです — Saya vegetarian</option>
+      <option value="halal">ハラールでお願いします — Tolong yang halal</option>
+      <option value="nopork">豚肉は食べられません — Saya tidak bisa makan babi</option>
+      <option value="nospicy">辛いものは苦手です — Saya tidak suka pedas</option>
+    </select>
+    <button class="btn btn-primary" style="margin-top:12px" onclick="showAlergiCard()">Tampilkan Kartu Alergi</button>
+  </div>
+</section>
+<!-- ============ KUIS ============ -->
+<section id="sec-kuis">
+  <div class="card">
+    <h2>✏️ Kuis Travel N5</h2>
+    <p class="sub">10 soal pilihan ganda seputar kosakata &amp; frasa perjalanan. Skor terbaikmu: <b id="bestScore">—</b></p>
+    <div id="quizHome"><button class="btn btn-primary" onclick="startQuiz()">Mulai Kuis</button></div>
+    <div id="quizPlay" style="display:none">
+      <p class="note" id="quizProg"></p>
+      <h2 id="quizQ" style="margin:10px 0"></h2>
+      <div id="quizOpts"></div>
+      <p class="note" id="quizFeed" style="min-height:20px"></p>
+      <button class="btn btn-primary" id="quizNext" style="display:none" onclick="nextQuiz()">Soal Berikutnya</button>
+    </div>
+    <div id="quizDone" style="display:none;text-align:center">
+      <div class="score" id="quizScore"></div>
+      <p id="quizMsg" style="margin:8px 0 16px"></p>
+      <button class="btn btn-primary" onclick="startQuiz()">Main Lagi</button>
+    </div>
+  </div>
+</section>
+<!-- ============ TRIP ============ -->
+<section id="sec-trip">
+  <div class="card">
+    <h2>🗺️ Perencana Trip</h2>
+    <p class="sub">Rencanakan perjalananmu. Semua tersimpan di HP, bisa diubah kapan saja.</p>
+    <label>Kota tujuan</label>
+    <select id="tripCity">
+      <option value="Tokyo|東京">Tokyo — 東京</option>
+      <option value="Kyoto|京都">Kyoto — 京都</option>
+      <option value="Osaka|大阪">Osaka — 大阪</option>
+      <option value="Nara|奈良">Nara — 奈良</option>
+      <option value="Fuji / Kawaguchiko|富士山・河口湖">Fuji / Kawaguchiko — 富士山・河口湖</option>
+      <option value="Hiroshima|広島">Hiroshima — 広島</option>
+      <option value="Hokkaido|北海道">Hokkaido — 北海道</option>
+      <option value="Okinawa|沖縄">Okinawa — 沖縄</option>
+    </select>
+    <div class="row" style="margin-top:10px">
+      <div><label>Jumlah hari</label><input type="number" id="tripDays" min="1" max="14" value="3"></div>
+      <div><label>Budget (JPY)</label><input type="number" id="tripBudget" min="0" step="1000" value="100000" placeholder="100000"></div>
+    </div>
+    <label style="margin-top:10px">Catatan trip</label>
+    <textarea id="tripNote" placeholder="Contoh: berangkat pagi, ingin lihat sakura…"></textarea>
+    <button class="btn btn-primary" style="margin-top:12px" onclick="saveTrip()">Simpan Rencana</button>
+    <div id="tripSummary" style="margin-top:12px"></div>
+  </div>
+  <div class="card">
+    <h2>🎒 Packing Checklist</h2>
+    <p class="sub">Barang bawaan wajib sebelum berangkat.</p>
+    <div id="packList"></div>
+  </div>
+  <div class="card">
+    <h2>⭐ Wishlist</h2>
+    <p class="sub">Tempat &amp; hal yang ingin kamu kunjungi atau coba.</p>
+    <div class="row"><input type="text" id="wishInput" placeholder="Contoh: Kuil Fushimi Inari"><button class="btn btn-ghost btn-small" style="flex:0 0 auto" onclick="addWish()">+ Tambah</button></div>
+    <div id="wishList" style="margin-top:10px"></div>
+  </div>
+  <div class="card">
+    <h2>💴 Pengeluaran</h2>
+    <p class="sub">Catat pengeluaran selama trip (JPY). Sisa budget dihitung otomatis.</p>
+    <div class="row"><input type="text" id="expName" placeholder="Contoh: Tiket kereta"><input type="number" id="expAmt" placeholder="JPY" min="0" style="flex:0 0 110px"><button class="btn btn-ghost btn-small" style="flex:0 0 auto" onclick="addExp()">+ Tambah</button></div>
+    <div id="expList" style="margin-top:10px"></div>
+    <p class="sum" id="expSummary" style="margin-top:10px"></p>
+  </div>
+</section>
+<div class="card"><p class="note" style="text-align:center">Dibuat untuk <b>Nihongo Santai</b> — konten level N5. Semua data tersimpan di HP, tanpa internet, tanpa akun. Selamat jalan! いってらっしゃい (itterasshai).</p></div>
+</main>
+<nav class="tabs">
+  <button class="on" onclick="showTab('frasa',this)"><b>🗣️</b>Frasa</button>
+  <button onclick="showTab('konbini',this)"><b>🍙</b>Konbini</button>
+  <button onclick="showTab('menu',this)"><b>🍜</b>Menu</button>
+  <button onclick="showTab('kuis',this)"><b>✏️</b>Kuis</button>
+  <button onclick="showTab('trip',this)"><b>🗺️</b>Trip</button>
+</nav>
+<div class="modal" id="modal" onclick="if(event.target===this)closeModal()">
+  <div class="box"><div class="big" id="mBig"></div><div class="rm" id="mRm"></div><div class="tr" id="mTr"></div><div class="hint" id="mHint"></div><button class="btn btn-primary" onclick="closeModal()">Tutup</button></div>
+</div>
+<script>
+/* ===== DATA (konten asli Nihongo Santai, level N5 — hanya item yang dikenal luas) ===== */
+const FRASA=[
+{ja:"おはようございます",rm:"ohayō gozaimasu",id:"Selamat pagi",c:"Salam"},
+{ja:"こんにちは",rm:"konnichiwa",id:"Selamat siang · Halo",c:"Salam"},
+{ja:"こんばんは",rm:"konbanwa",id:"Selamat malam",c:"Salam"},
+{ja:"ありがとうございます",rm:"arigatō gozaimasu",id:"Terima kasih",c:"Salam"},
+{ja:"はじめまして",rm:"hajimemashite",id:"Senang bertemu dengan Anda",c:"Salam"},
+{ja:"さようなら",rm:"sayōnara",id:"Selamat tinggal",c:"Salam"},
+{ja:"おやすみなさい",rm:"oyasumi nasai",id:"Selamat tidur",c:"Salam"},
+{ja:"すみません",rm:"sumimasen",id:"Permisi · Maaf",c:"Salam"},
+{ja:"トイレはどこですか",rm:"toire wa doko desu ka",id:"Di mana toilet?",c:"Tanya Arah"},
+{ja:"駅はどこですか",rm:"eki wa doko desu ka",id:"Di mana stasiun?",c:"Tanya Arah"},
+{ja:"ここはどこですか",rm:"koko wa doko desu ka",id:"Ini di mana?",c:"Tanya Arah"},
+{ja:"右ですか、左ですか",rm:"migi desu ka, hidari desu ka",id:"Kanan atau kiri?",c:"Tanya Arah"},
+{ja:"まっすぐですか",rm:"massugu desu ka",id:"Lurus saja?",c:"Tanya Arah"},
+{ja:"英語は話せますか",rm:"eigo wa hanasemasu ka",id:"Bisa bicara bahasa Inggris?",c:"Tanya Arah"},
+{ja:"いくらですか",rm:"ikura desu ka",id:"Berapa harganya?",c:"Belanja"},
+{ja:"これをください",rm:"kore o kudasai",id:"Saya mau yang ini",c:"Belanja"},
+{ja:"カードは使えますか",rm:"kādo wa tsukaemasu ka",id:"Bisa pakai kartu?",c:"Belanja"},
+{ja:"袋はいりません",rm:"fukuro wa irimasen",id:"Tidak perlu kantong",c:"Belanja"},
+{ja:"レシートをください",rm:"reshīto o kudasai",id:"Minta struknya",c:"Belanja"},
+{ja:"メニューをください",rm:"menyū o kudasai",id:"Minta menunya",c:"Restoran"},
+{ja:"水をください",rm:"mizu o kudasai",id:"Minta air putih",c:"Restoran"},
+{ja:"すみません、注文をお願いします",rm:"sumimasen, chūmon o onegai shimasu",id:"Permisi, saya mau pesan",c:"Restoran"},
+{ja:"おいしいです",rm:"oishii desu",id:"Enak sekali",c:"Restoran"},
+{ja:"お会計をお願いします",rm:"okaikei o onegai shimasu",id:"Minta bonnya",c:"Restoran"},
+{ja:"助けてください",rm:"tasukete kudasai",id:"Tolong saya!",c:"Darurat"},
+{ja:"病院はどこですか",rm:"byōin wa doko desu ka",id:"Di mana rumah sakit?",c:"Darurat"},
+{ja:"警察を呼んでください",rm:"keisatsu o yonde kudasai",id:"Tolong panggil polisi",c:"Darurat"},
+{ja:"具合が悪いです",rm:"guai ga warui desu",id:"Saya tidak enak badan",c:"Darurat"},
+{ja:"薬局はどこですか",rm:"yakkyoku wa doko desu ka",id:"Di mana apotek?",c:"Darurat"},
+{ja:"ごめんなさい",rm:"gomen nasai",id:"Maafkan saya",c:"Minta Maaf"},
+{ja:"申し訳ありません",rm:"mōshiwake arimasen",id:"Saya benar-benar minta maaf",c:"Minta Maaf"},
+{ja:"わかりません",rm:"wakarimasen",id:"Saya tidak mengerti",c:"Minta Maaf"},
+{ja:"もう一度お願いします",rm:"mō ichido onegai shimasu",id:"Tolong ulangi sekali lagi",c:"Minta Maaf"}
+];
+const KONBINI=[
+{ja:"おにぎり",rm:"onigiri",id:"Nasi kepal",c:"Makanan"},
+{ja:"お弁当",rm:"obentō",id:"Nasi kotak",c:"Makanan"},
+{ja:"サンドイッチ",rm:"sandoitchi",id:"Roti lapis",c:"Makanan"},
+{ja:"パン",rm:"pan",id:"Roti",c:"Makanan"},
+{ja:"おでん",rm:"oden",id:"Oden (rebusan kuah)",c:"Makanan"},
+{ja:"肉まん",rm:"nikuman",id:"Bakpao daging",c:"Makanan"},
+{ja:"からあげ",rm:"karaage",id:"Ayam goreng",c:"Makanan"},
+{ja:"カップラーメン",rm:"kappu rāmen",id:"Mi instan cup",c:"Makanan"},
+{ja:"カレーパン",rm:"karē pan",id:"Roti isi kari",c:"Makanan"},
+{ja:"メロンパン",rm:"meron pan",id:"Roti melon",c:"Makanan"},
+{ja:"どら焼き",rm:"dorayaki",id:"Dorayaki",c:"Makanan"},
+{ja:"団子",rm:"dango",id:"Dango (kue beras tusuk)",c:"Makanan"},
+{ja:"せんべい",rm:"senbei",id:"Kerupuk beras",c:"Makanan"},
+{ja:"お菓子",rm:"okashi",id:"Camilan · permen",c:"Makanan"},
+{ja:"チョコレート",rm:"chokorēto",id:"Cokelat",c:"Makanan"},
+{ja:"サラダ",rm:"sarada",id:"Salad",c:"Makanan"},
+{ja:"たまご",rm:"tamago",id:"Telur",c:"Makanan"},
+{ja:"ゆで卵",rm:"yude tamago",id:"Telur rebus",c:"Makanan"},
+{ja:"プリン",rm:"purin",id:"Puding",c:"Makanan"},
+{ja:"ヨーグルト",rm:"yōguruto",id:"Yoghurt",c:"Makanan"},
+{ja:"アイスクリーム",rm:"aisukurīmu",id:"Es krim",c:"Makanan"},
+{ja:"お茶",rm:"ocha",id:"Teh",c:"Minuman"},
+{ja:"緑茶",rm:"ryokucha",id:"Teh hijau",c:"Minuman"},
+{ja:"コーヒー",rm:"kōhī",id:"Kopi",c:"Minuman"},
+{ja:"牛乳",rm:"gyūnyū",id:"Susu",c:"Minuman"},
+{ja:"水",rm:"mizu",id:"Air mineral",c:"Minuman"},
+{ja:"ジュース",rm:"jūsu",id:"Jus",c:"Minuman"},
+{ja:"ビール",rm:"bīru",id:"Bir",c:"Minuman"},
+{ja:"ガム",rm:"gamu",id:"Permen karet",c:"Lainnya"},
+{ja:"ティッシュ",rm:"tisshu",id:"Tisu",c:"Lainnya"},
+{ja:"カイロ",rm:"kairo",id:"Penghangat tangan",c:"Lainnya"},
+{ja:"雨傘",rm:"amagasa",id:"Payung",c:"Lainnya"},
+{ja:"充電器",rm:"jūdenki",id:"Charger",c:"Lainnya"}
+];
+const MENU=[
+{ja:"ラーメン",rm:"rāmen",id:"Mi ramen",c:"Mi"},
+{ja:"うどん",rm:"udon",id:"Mi udon",c:"Mi"},
+{ja:"そば",rm:"soba",id:"Mi soba",c:"Mi"},
+{ja:"焼きそば",rm:"yakisoba",id:"Mi goreng",c:"Mi"},
+{ja:"つけ麺",rm:"tsukemen",id:"Mi celup kuah",c:"Mi"},
+{ja:"ご飯",rm:"gohan",id:"Nasi",c:"Nasi"},
+{ja:"丼",rm:"donburi",id:"Nasi mangkuk",c:"Nasi"},
+{ja:"牛丼",rm:"gyūdon",id:"Nasi daging sapi",c:"Nasi"},
+{ja:"親子丼",rm:"oyakodon",id:"Nasi ayam telur",c:"Nasi"},
+{ja:"カツ丼",rm:"katsudon",id:"Nasi katsu",c:"Nasi"},
+{ja:"チャーハン",rm:"chāhan",id:"Nasi goreng",c:"Nasi"},
+{ja:"カレーライス",rm:"karē raisu",id:"Nasi kari",c:"Nasi"},
+{ja:"おにぎり",rm:"onigiri",id:"Nasi kepal",c:"Nasi"},
+{ja:"寿司",rm:"sushi",id:"Sushi",c:"Sushi & Ikan"},
+{ja:"刺身",rm:"sashimi",id:"Sashimi",c:"Sushi & Ikan"},
+{ja:"まぐろ",rm:"maguro",id:"Tuna",c:"Sushi & Ikan"},
+{ja:"サーモン",rm:"sāmon",id:"Salmon",c:"Sushi & Ikan"},
+{ja:"えび",rm:"ebi",id:"Udang",c:"Sushi & Ikan"},
+{ja:"天ぷら",rm:"tenpura",id:"Tempura",c:"Daging"},
+{ja:"とんかつ",rm:"tonkatsu",id:"Daging babi goreng tepung",c:"Daging"},
+{ja:"唐揚げ",rm:"karaage",id:"Ayam goreng",c:"Daging"},
+{ja:"焼き鳥",rm:"yakitori",id:"Sate ayam",c:"Daging"},
+{ja:"餃子",rm:"gyōza",id:"Gyoza",c:"Daging"},
+{ja:"焼肉",rm:"yakiniku",id:"Daging panggang",c:"Daging"},
+{ja:"すき焼き",rm:"sukiyaki",id:"Sukiyaki",c:"Daging"},
+{ja:"しゃぶしゃぶ",rm:"shabushabu",id:"Shabu-shabu",c:"Daging"},
+{ja:"味噌汁",rm:"misoshiru",id:"Sup miso",c:"Lainnya"},
+{ja:"サラダ",rm:"sarada",id:"Salad",c:"Lainnya"},
+{ja:"卵",rm:"tamago",id:"Telur",c:"Lainnya"},
+{ja:"納豆",rm:"nattō",id:"Natto (kedelai fermentasi)",c:"Lainnya"},
+{ja:"漬物",rm:"tsukemono",id:"Acar",c:"Lainnya"},
+{ja:"お好み焼き",rm:"okonomiyaki",id:"Okonomiyaki",c:"Lainnya"},
+{ja:"おでん",rm:"oden",id:"Oden",c:"Lainnya"},
+{ja:"たこ焼き",rm:"takoyaki",id:"Takoyaki",c:"Lainnya"},
+{ja:"お茶",rm:"ocha",id:"Teh",c:"Minuman & Manis"},
+{ja:"緑茶",rm:"ryokucha",id:"Teh hijau",c:"Minuman & Manis"},
+{ja:"コーヒー",rm:"kōhī",id:"Kopi",c:"Minuman & Manis"},
+{ja:"ビール",rm:"bīru",id:"Bir",c:"Minuman & Manis"},
+{ja:"日本酒",rm:"nihonshu",id:"Sake",c:"Minuman & Manis"},
+{ja:"ケーキ",rm:"kēki",id:"Kue",c:"Minuman & Manis"},
+{ja:"アイスクリーム",rm:"aisukurīmu",id:"Es krim",c:"Minuman & Manis"}
+];
+const ALERGI=[
+{ja:"卵",rm:"tamago",id:"Telur"},{ja:"牛乳",rm:"gyūnyū",id:"Susu"},
+{ja:"小麦",rm:"komugi",id:"Gandum"},{ja:"ピーナッツ",rm:"pīnattsu",id:"Kacang tanah"},
+{ja:"えび",rm:"ebi",id:"Udang"},{ja:"かに",rm:"kani",id:"Kepiting"},
+{ja:"そば",rm:"soba",id:"Soba"},{ja:"大豆",rm:"daizu",id:"Kedelai"},
+{ja:"豚肉",rm:"butaniku",id:"Babi"},{ja:"牛肉",rm:"gyūniku",id:"Sapi"},
+{ja:"鶏肉",rm:"toriniku",id:"Ayam"},{ja:"魚",rm:"sakana",id:"Ikan"}
+];
+const QUIZ=[
+{q:"「トイレはどこですか。」 artinya apa?",o:["Di mana toilet?","Berapa harganya?","Saya mau yang ini","Selamat pagi"],a:0},
+{q:"「ありがとうございます」 artinya apa?",o:["Maafkan saya","Terima kasih","Selamat tinggal","Saya tidak mengerti"],a:1},
+{q:"Kata 「駅」(えき) artinya apa?",o:["Bandara","Hotel","Stasiun","Restoran"],a:2},
+{q:"「おいしいです」 artinya apa?",o:["Mahal","Enak","Pedas","Dingin"],a:1},
+{q:"「いくらですか」 dipakai untuk apa?",o:["Menanyakan arah","Menanyakan harga","Memesan makanan","Minta tolong"],a:1},
+{q:"「すみません」 artinya apa?",o:["Terima kasih","Selamat malam","Permisi · Maaf","Sampai jumpa"],a:2},
+{q:"Kata 「水」(みず) artinya apa?",o:["Api","Air","Nasi","Teh"],a:1},
+{q:"「お会計をお願いします」 artinya apa?",o:["Minta menu","Minta air","Minta kantong","Minta bon / tagihan"],a:3},
+{q:"Kata 「右」(みぎ) artinya apa?",o:["Kiri","Lurus","Belakang","Kanan"],a:3},
+{q:"「助けてください」 artinya apa?",o:["Selamat pagi","Saya mau yang ini","Berapa harganya?","Tolong saya!"],a:3}
+];
+const PACK=[
+{ja:"パスポート",rm:"pasupōto",id:"Paspor"},{ja:"充電器",rm:"jūdenki",id:"Charger"},
+{ja:"薬",rm:"kusuri",id:"Obat"},{ja:"服",rm:"fuku",id:"Pakaian"},
+{ja:"雨傘",rm:"amagasa",id:"Payung"},{ja:"現金",rm:"genkin",id:"Uang tunai"},
+{ja:"カメラ",rm:"kamera",id:"Kamera"},{ja:"歯ブラシ",rm:"haburashi",id:"Sikat gigi"},
+{ja:"タオル",rm:"taoru",id:"Handuk"},{ja:"地図",rm:"chizu",id:"Peta / panduan"}
+];
+/* ===== UTIL ===== */
+const $=id=>document.getElementById(id);
+function ls(k,d){try{const v=localStorage.getItem(k);return v===null?d:JSON.parse(v)}catch(e){return d}}
+function sv(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;")}
+function showTab(name,btn){
+  document.querySelectorAll("section").forEach(s=>s.classList.remove("on"));
+  $("sec-"+name).classList.add("on");
+  document.querySelectorAll(".tabs button").forEach(b=>b.classList.remove("on"));
+  btn.classList.add("on");
+  window.scrollTo(0,0);
+}
+function openModal(big,rm,tr,hint){
+  $("mBig").textContent=big;$("mRm").textContent=rm;$("mTr").textContent=tr;$("mHint").textContent=hint||"";
+  $("modal").classList.add("on");
+}
+function closeModal(){$("modal").classList.remove("on")}
+/* ===== FRASA ===== */
+let frasaCat="Semua";
+function renderFrasaCats(){
+  const cats=["Semua",...new Set(FRASA.map(f=>f.c))];
+  $("frasaCats").innerHTML=cats.map(c=>`<button class="mini${c===frasaCat?" on":""}" onclick="frasaCat='${c}';renderFrasa()">${c}</button>`).join("");
+}
+function renderFrasa(){
+  const q=($("frasaSearch").value||"").toLowerCase();
+  const list=FRASA.filter(f=>(frasaCat==="Semua"||f.c===frasaCat)&&(!q||f.ja.includes(q)||f.rm.toLowerCase().includes(q)||f.id.toLowerCase().includes(q)));
+  $("frasaList").innerHTML=list.length?list.map((f,i)=>`<div class="item" onclick="openModal('${f.ja}','${f.rm}','${f.id}','Ketuk di luar kartu atau tombol Tutup untuk kembali')"><div class="ja">${f.ja}</div><div class="rm">${f.rm}</div><div class="tr">${f.id}</div><span class="tag">${f.c}</span></div>`).join(""):`<p class="note">Tidak ada frasa yang cocok. Coba kata lain.</p>`;
+}
+/* ===== KONBINI ===== */
+let konbiniCat="Semua";
+let konbiniDone=ls("nst_konbini_v1",[]);
+function renderKonbiniCats(){
+  const cats=["Semua",...new Set(KONBINI.map(f=>f.c))];
+  $("konbiniCats").innerHTML=cats.map(c=>`<button class="mini${c===konbiniCat?" on":""}" onclick="konbiniCat='${c}';renderKonbini()">${c}</button>`).join("");
+}
+function renderKonbini(){
+  const n=konbiniDone.length,total=KONBINI.length;
+  $("konbiniCount").textContent=n+" / "+total;
+  $("konbiniBar").style.width=Math.round(n/total*100)+"%";
+  $("konbiniBadge").textContent=n>=30?"🏆 コンビニの達人 — Master Konbini!":n>=20?"🥈 コンビニマスター — 20 item!":n>=10?"🥉 コンビニ初心者 — 10 item!":n>0?"👍 Bagus, terus coba!":"🏅 Mulai petualanganmu!";
+  const list=KONBINI.filter(f=>konbiniCat==="Semua"||f.c===konbiniCat);
+  $("konbiniList").innerHTML=list.map(f=>{
+    const done=konbiniDone.includes(f.ja);
+    return `<label class="item check${done?" done":""}"><input type="checkbox" ${done?"checked":""} onchange="toggleKonbini('${f.ja}',this.checked)"><span><span class="ja">${f.ja}</span><br><span class="rm">${f.rm} — ${f.id}</span></span></label>`;
+  }).join("");
+}
+function toggleKonbini(ja,on){
+  konbiniDone=on?[...new Set([...konbiniDone,ja])]:konbiniDone.filter(x=>x!==ja);
+  sv("nst_konbini_v1",konbiniDone);renderKonbini();
+}
+function resetKonbini(){if(confirm("Reset semua checklist konbini?")){konbiniDone=[];sv("nst_konbini_v1",[]);renderKonbini();}}
+/* ===== MENU ===== */
+let menuCat="Semua";
+function renderMenuCats(){
+  const cats=["Semua",...new Set(MENU.map(f=>f.c))];
+  $("menuCats").innerHTML=cats.map(c=>`<button class="mini${c===menuCat?" on":""}" onclick="menuCat='${c}';renderMenu()">${c}</button>`).join("");
+}
+function renderMenu(){
+  const q=($("menuSearch").value||"").toLowerCase();
+  const list=MENU.filter(f=>(menuCat==="Semua"||f.c===menuCat)&&(!q||f.ja.includes(q)||f.rm.toLowerCase().includes(q)||f.id.toLowerCase().includes(q)));
+  $("menuList").innerHTML=list.length?list.map(f=>`<div class="item" onclick="openModal('${f.ja}','${f.rm}','${f.id}','')"><div class="ja">${f.ja}</div><div class="rm">${f.rm}</div><div class="tr">${f.id}</div><span class="tag">${f.c}</span></div>`).join(""):`<p class="note">Tidak ada kata menu yang cocok. Coba kata lain.</p>`;
+}
+function renderAlergi(){
+  $("alergiList").innerHTML=ALERGI.map((a,i)=>`<label class="item check" style="display:flex"><input type="checkbox" class="alg" value="${i}"><span><span class="ja">${a.ja}</span><br><span class="rm">${a.rm} — ${a.id}</span></span></label>`).join("");
+}
+function showAlergiCard(){
+  const picked=[...document.querySelectorAll(".alg:checked")].map(c=>ALERGI[+c.value]);
+  const diet=$("dietSel").value;
+  if(!picked.length&&!diet){alert("Pilih dulu alergi atau dietmu.");return;}
+  let ja=[],tr=[];
+  if(picked.length){ja.push("アレルギーがあります。");tr.push("Saya punya alergi.");ja.push(picked.map(p=>p.ja).join("、")+"は食べられません。");tr.push("Saya tidak bisa makan: "+picked.map(p=>p.id.toLowerCase()).join(", ")+".");}
+  if(diet==="veg"){ja.push("ベジタリアンです。");tr.push("Saya vegetarian.");}
+  if(diet==="halal"){ja.push("ハラールでお願いします。");tr.push("Tolong yang halal.");}
+  if(diet==="nopork"){ja.push("豚肉は食べられません。");tr.push("Saya tidak bisa makan babi.");}
+  if(diet==="nospicy"){ja.push("辛いものは苦手です。");tr.push("Saya tidak suka pedas.");}
+  openModal(ja.join("\n"),"arerugī kādo",tr.join(" "),"Tunjukkan kartu ini ke staf restoran");
+}
+/* ===== KUIS ===== */
+let quizQs=[],quizIdx=0,quizScore=0,quizLock=false;
+function startQuiz(){
+  // Acak urutan opsi tiap soal, lalu lacak posisi baru jawaban benar
+  quizQs=QUIZ.map(q=>{const opts=shuffle([...q.o]);return{q:q.q,o:opts,a:opts.indexOf(q.o[q.a])};});
+  shuffle(quizQs);
+  quizIdx=0;quizScore=0;
+  $("quizHome").style.display="none";$("quizDone").style.display="none";$("quizPlay").style.display="block";
+  showQuizQ();
+}
+function showQuizQ(){
+  quizLock=false;
+  const q=quizQs[quizIdx];
+  $("quizProg").textContent="Soal "+(quizIdx+1)+" dari "+quizQs.length+" • Skor: "+quizScore;
+  $("quizQ").textContent=q.q;
+  $("quizFeed").textContent="";
+  $("quizNext").style.display="none";
+  $("quizOpts").innerHTML=q.o.map((o,i)=>`<button class="qopt" onclick="answerQuiz(${i},this)">${o}</button>`).join("");
+}
+function answerQuiz(i,btn){
+  if(quizLock)return;quizLock=true;
+  const q=quizQs[quizIdx];
+  const btns=[...document.querySelectorAll("#quizOpts .qopt")];
+  btns.forEach(b=>b.disabled=true);
+  if(i===q.a){quizScore++;btn.classList.add("ok");$("quizFeed").textContent="✅ Benar!";}
+  else{btn.classList.add("bad");btns[q.a].classList.add("ok");$("quizFeed").textContent="❌ Jawaban benar: "+q.o[q.a];}
+  $("quizProg").textContent="Soal "+(quizIdx+1)+" dari "+quizQs.length+" • Skor: "+quizScore;
+  $("quizNext").textContent=quizIdx+1>=quizQs.length?"Lihat Hasil":"Soal Berikutnya";
+  $("quizNext").style.display="block";
+}
+function nextQuiz(){
+  quizIdx++;
+  if(quizIdx>=quizQs.length){
+    $("quizPlay").style.display="none";$("quizDone").style.display="block";
+    $("quizScore").textContent=quizScore+" / "+quizQs.length;
+    $("quizMsg").textContent=quizScore===10?"🎉 Sempurna! Kamu siap jalan-jalan ke Jepang!":quizScore>=7?"👏 Bagus sekali! Tinggal sedikit lagi.":quizScore>=4?"🙂 Lumayan — coba lagi, pasti naik.":"💪 Jangan menyerah — baca Kartu Frasa dulu lalu coba lagi.";
+    const best=ls("nst_quiz_best_v1",0);
+    if(quizScore>best)sv("nst_quiz_best_v1",quizScore);
+    $("bestScore").textContent=Math.max(best,quizScore)+" / 10";
+  }else showQuizQ();
+}
+/* ===== TRIP ===== */
+let trip=ls("nst_trip_v1",{city:"Tokyo|東京",days:3,budget:100000,note:""});
+let packDone=ls("nst_pack_v1",[]);
+let wishes=ls("nst_wish_v1",[]);
+let exps=ls("nst_exp_v1",[]);
+function fmtJPY(n){return "¥"+Number(n||0).toLocaleString("id-ID")}
+function loadTrip(){
+  $("tripCity").value=trip.city;$("tripDays").value=trip.days;$("tripBudget").value=trip.budget;$("tripNote").value=trip.note||"";
+  renderTripSummary();renderPack();renderWish();renderExp();
+}
+function saveTrip(){
+  trip={city:$("tripCity").value,days:Math.max(1,Math.min(14,+($("tripDays").value||3))),budget:Math.max(0,+($("tripBudget").value||0)),note:$("tripNote").value||""};
+  sv("nst_trip_v1",trip);renderTripSummary();
+  alert("Rencana trip tersimpan di HP.");
+}
+function renderTripSummary(){
+  const [city,ja]=trip.city.split("|");
+  $("tripSummary").innerHTML=`<p class="sum">🗺️ <b>${esc(city)} ${esc(ja)}</b> • ${trip.days} hari • Budget <b>${fmtJPY(trip.budget)}</b>${trip.note?`<br>📝 ${esc(trip.note)}`:""}</p>`;
+}
+function renderPack(){
+  $("packList").innerHTML=PACK.map(p=>{
+    const done=packDone.includes(p.ja);
+    return `<label class="item check${done?" done":""}"><input type="checkbox" ${done?"checked":""} onchange="togglePack('${p.ja}',this.checked)"><span><span class="ja">${p.ja}</span><br><span class="rm">${p.rm} — ${p.id}</span></span></label>`;
+  }).join("");
+}
+function togglePack(ja,on){packDone=on?[...new Set([...packDone,ja])]:packDone.filter(x=>x!==ja);sv("nst_pack_v1",packDone);renderPack();}
+function renderWish(){
+  $("wishList").innerHTML=wishes.length?wishes.map((w,i)=>`<div class="item check"><input type="checkbox" ${w.done?"checked":""} onchange="toggleWish(${i},this.checked)"><span style="flex:1;${w.done?"text-decoration:line-through;opacity:.55":""}">${esc(w.text)}</span><button class="del" onclick="delWish(${i})">✕</button></div>`).join(""):`<p class="note">Belum ada wishlist. Tambahkan tempat yang ingin kamu kunjungi.</p>`;
+}
+function addWish(){
+  const v=$("wishInput").value.trim();if(!v)return;
+  wishes.push({text:v,done:false});sv("nst_wish_v1",wishes);$("wishInput").value="";renderWish();
+}
+function toggleWish(i,on){wishes[i].done=on;sv("nst_wish_v1",wishes);renderWish();}
+function delWish(i){wishes.splice(i,1);sv("nst_wish_v1",wishes);renderWish();}
+function renderExp(){
+  $("expList").innerHTML=exps.length?exps.map((e,i)=>`<div class="item"><div class="row"><span style="flex:1">${esc(e.name)}</span><b>${fmtJPY(e.amt)}</b><button class="del" onclick="delExp(${i})">✕</button></div></div>`).join(""):`<p class="note">Belum ada pengeluaran.</p>`;
+  const total=exps.reduce((s,e)=>s+(+e.amt||0),0);
+  const sisa=(+trip.budget||0)-total;
+  $("expSummary").innerHTML=`Total keluar: <b>${fmtJPY(total)}</b> • Budget: <b>${fmtJPY(trip.budget)}</b> • Sisa: <b style="color:${sisa<0?"var(--red)":"var(--green)"}">${fmtJPY(sisa)}</b>`;
+}
+function addExp(){
+  const n=$("expName").value.trim(),a=+($("expAmt").value||0);
+  if(!n||a<=0){alert("Isi nama dan jumlah pengeluarannya.");return;}
+  exps.push({name:n,amt:a});sv("nst_exp_v1",exps);$("expName").value="";$("expAmt").value="";renderExp();
+}
+function delExp(i){exps.splice(i,1);sv("nst_exp_v1",exps);renderExp();}
+/* ===== INIT ===== */
+$("bestScore").textContent=(ls("nst_quiz_best_v1",0)||"—")+(ls("nst_quiz_best_v1",0)?" / 10":"");
+renderFrasaCats();renderFrasa();renderKonbiniCats();renderKonbini();renderMenuCats();renderMenu();renderAlergi();loadTrip();
+setTimeout(()=>$("splash").classList.add("hide"),1300);
+</script>
+</body>
+</html>
