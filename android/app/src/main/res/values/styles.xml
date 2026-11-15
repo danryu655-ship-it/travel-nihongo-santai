@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <!-- Android 15 (API 35) memaksa edge-to-edge: WebView menggambar sampai
+             ke bawah tombol navigasi sistem, sehingga tab bawah aplikasi
+             ketutupan dan tidak bisa diklik. Opt-out ini membuat konten WebView
+             berhenti di atas nav bar sistem. Di API < 35 atribut ini diabaikan
+             (edge-to-edge memang belum dipaksa di sana). -->
+        <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+    </style>
+</resources>
